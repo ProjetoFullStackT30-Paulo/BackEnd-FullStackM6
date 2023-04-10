@@ -9,3 +9,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User{
+  id String @id @default(uuid())
+  name String @db.VarChar(254)
+  announcement Announcement[]
+
+  @@map("users")
+}
+
+model Announcement{
+  id String @id @default(uuid())
+  brand String @db.VarChar(150)
+  model String @db.VarChar(254)
+  manufacture_year String @db.VarChar(4)
+  fuel String @db.VarChar(150)
+  mileage Int @db.Integer()
+  color String @db.VarChar(150)
+  price_fipe String @db.VarChar(50)
+  price String @db.VarChar(50)
+  description String @db.Text()
+  is_active Boolean @default(true)
+  created_at DateTime @default(now())
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String 
+  listImage ListImage[] 
+
+  @@map("announcements")
+}
+
+model ListImage{
+  id String @id @default(uuid())
+  image String @db.VarChar(200)
+  announcement Announcement @relation(fields: [announcement_id], references: [id], onDelete: Cascade)
+  announcement_id String
+  
+  @@map("list_image")
+}
