@@ -1,3 +1,1 @@
-import * as express from "express";
-
-export async function appRoutes(app: express.Application) {}
+export { userRouter } from "./users.routes";
