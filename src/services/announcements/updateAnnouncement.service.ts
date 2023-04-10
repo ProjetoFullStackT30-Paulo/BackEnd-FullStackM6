@@ -1,5 +1,5 @@
 import { AppError } from "../../errors";
-import { IAnnouncementUpdateRequest } from "../../interfaces/announcements.interfaces";
+import { IAnnouncementUpdateRequest } from "../../interfaces";
 import prisma from "../../prisma";
 
 export const updateAnnouncementService = async (
