@@ -10,12 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role{
+  BUYER
+  SELLER
+  ADMIN
+}
+
 model User{
   id String @id @default(uuid())
   name String @db.VarChar(254)
+  email String @db.VarChar(254) @unique
+  password String @db.VarChar(128)
+  cpf String @db.VarChar(11) @unique
+  phone String @db.VarChar(20)
+  birthdate String @db.VarChar(50)
+  description String @db.Text()
+  role Role @default(BUYER)
+  is_active Boolean @default(true)
+  created_at DateTime @default(now())
+  address Address?
   announcement Announcement[]
 
   @@map("users")
+}
+
+model Address{
+  id String @id @default(uuid())
+  zip_code String @db.VarChar(8)
+  state String @db.VarChar(150)
+  city String @db.VarChar(150)
+  street String @db.VarChar(150)
+  number String @db.VarChar(10)
+  complement String? @db.VarChar(150)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String @unique
+  
+  @@map("adresses")
 }
 
 model Announcement{

@@ -1,4 +1,10 @@
-export { createUserController } from "./users.controllers";
+export {
+  createUserController,
+  listUserController,
+  retrieveUserController,
+  updateUserController,
+  deleteUserController,
+} from "./users.controllers";
 export {
   createAnnouncementController,
   listAnnouncementController,

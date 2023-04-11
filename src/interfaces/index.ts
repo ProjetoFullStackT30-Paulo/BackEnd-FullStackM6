@@ -1,2 +1,5 @@
-export { IUserRequest } from "./users.interfaces";
-export { IAnnouncementRequest } from "./announcements.interfaces";
+export { IUserRequest, IUserUpdateRequest } from "./users.interfaces";
+export {
+  IAnnouncementRequest,
+  IAnnouncementUpdateRequest,
+} from "./announcements.interfaces";
