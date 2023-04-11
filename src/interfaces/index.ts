@@ -1,4 +1,4 @@
-export { IUserRequest } from "./users.interfaces";
+export { IUserRequest, IUserUpdateRequest } from "./users.interfaces";
 export {
   IAnnouncementRequest,
   IAnnouncementUpdateRequest,
