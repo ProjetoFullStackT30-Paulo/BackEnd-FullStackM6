@@ -6,11 +6,21 @@ import {
   retrieveAnnouncementController,
   updateAnnouncementController,
 } from "../controllers";
+import { validateSchemaMiddleware } from "../middlewares";
+import { AnnouncementCreate, AnnouncementUpdate } from "../schemas";
 
 export const announcementRouter = Router();
 
-announcementRouter.post("/:id", createAnnouncementController);
+announcementRouter.post(
+  "/:id",
+  validateSchemaMiddleware(AnnouncementCreate),
+  createAnnouncementController
+);
 announcementRouter.get("", listAnnouncementController);
 announcementRouter.get("/:id", retrieveAnnouncementController);
-announcementRouter.patch("/:id", updateAnnouncementController);
+announcementRouter.patch(
+  "/:id",
+  validateSchemaMiddleware(AnnouncementUpdate),
+  updateAnnouncementController
+);
 announcementRouter.delete("/:id", deleteAnnouncementController);
