@@ -3,14 +3,14 @@ import { z } from "zod";
 export const AnnouncementCreate = z.object({
   brand: z.string(),
   model: z.string(),
-  manufacture_year: z.number(),
+  manufacture_year: z.string(),
   fuel: z.string(),
   mileage: z.number(),
   color: z.string(),
-  price: z.number(),
+  price: z.string(),
+  price_fipe: z.string(),
   description: z.string(),
-  is_active: z.string(),
-  created_at: z.string(),
+  listImage: z.string().array().optional(),
 });
 
 export const AnnouncementReturn = AnnouncementCreate.extend({

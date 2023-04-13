@@ -7,7 +7,7 @@ import {
   updateAnnouncementController,
 } from "../controllers";
 import { validateSchemaMiddleware } from "../middlewares";
-import { AnnouncementCreate, AnnouncementUpdate } from "../schemas";
+import { AnnouncementCreate, AnnouncementUpdateRequest } from "../schemas";
 
 export const announcementRouter = Router();
 
@@ -20,7 +20,7 @@ announcementRouter.get("", listAnnouncementController);
 announcementRouter.get("/:id", retrieveAnnouncementController);
 announcementRouter.patch(
   "/:id",
-  validateSchemaMiddleware(AnnouncementUpdate),
+  validateSchemaMiddleware(AnnouncementUpdateRequest),
   updateAnnouncementController
 );
 announcementRouter.delete("/:id", deleteAnnouncementController);

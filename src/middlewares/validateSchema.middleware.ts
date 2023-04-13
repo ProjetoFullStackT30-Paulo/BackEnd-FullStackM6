@@ -9,5 +9,7 @@ export const validateSchemaMiddleware =
       req.body = bodyValidated;
 
       return next();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
