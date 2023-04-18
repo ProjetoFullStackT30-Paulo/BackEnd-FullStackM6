@@ -15,7 +15,7 @@ export interface IUserRequest {
   phone: string;
   birthdate: string;
   description: string;
-  role?: "BUYER" | "SELLER" | "ADMIN";
+  role: "BUYER" | "SELLER" | "ADMIN";
   address: IAddressRequest;
 }
 

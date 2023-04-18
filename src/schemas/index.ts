@@ -1,45 +1,15 @@
-import { z } from "zod";
+export {
+  UserCreateSchema,
+  UserArraySchema,
+  UserReturnSchema,
+  UserUpdateSchema,
+  UserUpdateRequestSchema,
+} from "./user.schema";
 
-export const AnnouncementCreate = z.object({
-  brand: z.string(),
-  model: z.string(),
-  manufacture_year: z.number(),
-  fuel: z.string(),
-  mileage: z.number(),
-  color: z.string(),
-  price: z.number(),
-  description: z.string(),
-  is_active: z.string(),
-  created_at: z.string(),
-});
-
-export const AnnouncementReturn = AnnouncementCreate.extend({
-  id: z.string(),
-
-  images: z.string().array(),
-
-  user: z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string().email(),
-    cpf: z.string(),
-    phone: z.string(),
-    birthdate: z.string(),
-    description: z.string(),
-    is_active: z.string(),
-
-    address: z.object({
-      cep: z.string(),
-      state: z.string(),
-      city: z.string(),
-      street: z.string(),
-      number: z.number(),
-      complement: z.string(),
-    }),
-  }),
-});
-
-export const AnnouncementUpdateRequest = AnnouncementCreate.partial();
-export const AnnouncementUpdate = AnnouncementCreate.partial().required();
-
-export const AnnouncementArray = AnnouncementReturn.array();
+export {
+  AnnouncementReturnSchema,
+  AnnouncementArraySchema,
+  AnnouncementCreateSchema,
+  AnnouncementUpdateSchema,
+  AnnouncementUpdateRequestSchema,
+} from "./announcements.schema";
