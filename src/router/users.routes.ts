@@ -7,12 +7,40 @@ import {
   retrieveUserController,
   updateUserController,
 } from "../controllers";
+import {
+  validateSchemaMiddleware,
+  verifyProfileOwner,
+  verifyUserIsAuthenticated,
+} from "../middlewares";
+import { UserCreateSchema, UserUpdateSchema } from "../schemas";
 
 export const userRouter = Router();
 
-userRouter.post("", createUserController);
+userRouter.post(
+  "",
+  validateSchemaMiddleware(UserCreateSchema),
+  createUserController
+);
 userRouter.get("", listUserController);
 userRouter.get("/:id", retrieveUserController);
-userRouter.patch("/:id", updateUserController);
-userRouter.delete("/:id", deleteUserController);
-userRouter.get("/:id/announcements", listAnnouncementWithUserController);
+
+userRouter.patch(
+  "/:id",
+  verifyUserIsAuthenticated,
+  verifyProfileOwner,
+  validateSchemaMiddleware(UserUpdateSchema),
+  updateUserController
+);
+
+userRouter.delete(
+  "/:id",
+  verifyUserIsAuthenticated,
+  verifyProfileOwner,
+  deleteUserController
+);
+
+userRouter.get(
+  "/:id/announcements",
+  verifyUserIsAuthenticated,
+  listAnnouncementWithUserController
+);

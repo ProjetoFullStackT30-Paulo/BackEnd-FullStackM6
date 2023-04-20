@@ -6,21 +6,37 @@ import {
   retrieveAnnouncementController,
   updateAnnouncementController,
 } from "../controllers";
-import { validateSchemaMiddleware } from "../middlewares";
-import { AnnouncementCreate, AnnouncementUpdateRequest } from "../schemas";
+
+import {
+  validateSchemaMiddleware,
+  verifyAnnouncementOwner,
+  verifyIsSeller,
+  verifyUserIsAuthenticated,
+} from "../middlewares";
+
+import { AnnouncementCreateSchema, AnnouncementUpdateSchema } from "../schemas";
 
 export const announcementRouter = Router();
 
 announcementRouter.post(
   "/:id",
-  validateSchemaMiddleware(AnnouncementCreate),
+  verifyUserIsAuthenticated,
+  verifyIsSeller,
+  validateSchemaMiddleware(AnnouncementCreateSchema),
   createAnnouncementController
 );
 announcementRouter.get("", listAnnouncementController);
 announcementRouter.get("/:id", retrieveAnnouncementController);
 announcementRouter.patch(
   "/:id",
-  validateSchemaMiddleware(AnnouncementUpdateRequest),
+  verifyUserIsAuthenticated,
+  verifyAnnouncementOwner,
+  validateSchemaMiddleware(AnnouncementUpdateSchema),
   updateAnnouncementController
 );
-announcementRouter.delete("/:id", deleteAnnouncementController);
+announcementRouter.delete(
+  "/:id",
+  verifyUserIsAuthenticated,
+  verifyAnnouncementOwner,
+  deleteAnnouncementController
+);
