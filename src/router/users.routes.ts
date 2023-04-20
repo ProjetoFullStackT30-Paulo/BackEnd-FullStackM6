@@ -12,7 +12,7 @@ import {
   verifyProfileOwner,
   verifyUserIsAuthenticated,
 } from "../middlewares";
-import { UserCreateSchema, UserUpdateSchema } from "../schemas";
+import { UserCreateSchema, UserUpdateRequestSchema } from "../schemas";
 
 export const userRouter = Router();
 
@@ -28,7 +28,7 @@ userRouter.patch(
   "/:id",
   verifyUserIsAuthenticated,
   verifyProfileOwner,
-  validateSchemaMiddleware(UserUpdateSchema),
+  validateSchemaMiddleware(UserUpdateRequestSchema),
   updateUserController
 );
 
