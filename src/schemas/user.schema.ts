@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 const AddressCreateSchema = z.object({
-  cep: z.string(),
+  zip_code: z.string(),
   state: z.string(),
   city: z.string(),
   street: z.string(),
-  number: z.number(),
-  complement: z.string(),
+  number: z.string(),
+  complement: z.string().optional(),
 });
 
 const AddressReturnSchema = AddressCreateSchema.extend({
@@ -17,20 +17,22 @@ const AddressReturnSchema = AddressCreateSchema.extend({
 export const UserCreateSchema = z.object({
   name: z.string(),
   email: z.string().email(),
+  password: z.string(),
   cpf: z.string(),
   phone: z.string(),
   birthdate: z.string(),
   description: z.string(),
+  role: z.enum(["BUYER", "SELLER", "ADMIN"]).optional(),
 
   address: AddressCreateSchema,
 });
 
 export const UserReturnSchema = UserCreateSchema.extend({
   id: z.string(),
-  created_at: z.string(),
+  created_at: z.date(),
 
   address: AddressReturnSchema.omit({ user_id: true }),
-});
+}).omit({ password: true });
 
 export const UserUpdateRequestSchema = UserCreateSchema.partial();
 export const UserUpdateSchema = UserCreateSchema.partial().required();

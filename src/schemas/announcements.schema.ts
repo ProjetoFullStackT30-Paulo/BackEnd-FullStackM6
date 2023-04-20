@@ -3,20 +3,21 @@ import { z } from "zod";
 export const AnnouncementCreateSchema = z.object({
   brand: z.string(),
   model: z.string(),
-  manufacture_year: z.number(),
+  manufacture_year: z.string(),
   fuel: z.string(),
   mileage: z.number(),
   color: z.string(),
-  price: z.number(),
+  price_fipe: z.string(),
+  price: z.string(),
   description: z.string(),
-  is_active: z.string(),
-  created_at: z.string(),
+  is_active: z.string().optional(),
+  listImage: z.string().array(),
 });
 
 export const AnnouncementReturnSchema = AnnouncementCreateSchema.extend({
   id: z.string(),
 
-  images: z.string().array(),
+  created_at: z.date(),
 
   user: z.object({
     id: z.string(),
