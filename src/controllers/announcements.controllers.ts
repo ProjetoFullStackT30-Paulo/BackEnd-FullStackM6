@@ -1,13 +1,12 @@
-import { Response } from "express";
-import { Request } from "express";
+import { Request, Response } from "express";
 import {
   createAnnouncementService,
-  deleteAnnouncementService,
   listAnnouncementService,
   listAnnouncementWithUserService,
   retrieveAnnouncementService,
   updateAnnouncementService,
-} from "../services/announcements";
+  deleteAnnouncementService,
+} from "../services";
 
 export const createAnnouncementController = async (
   req: Request,
