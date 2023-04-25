@@ -41,5 +41,5 @@ export const deleteUserController = async (req: Request, res: Response) => {
 export const loginUserController = async (req: Request, res: Response) => {
   const token = await loginUserService(req.body);
 
-  return res.status(200).json(token);
+  return res.status(201).json(token);
 };

@@ -4,6 +4,7 @@ export { verifyAnnouncementOwner } from "./isAnnouncementOwner.middleware";
 export { verifyUserIsAuthenticated } from "./isAuthenticated.middleware";
 export { verifyIsBuyer } from "./isBuyer.middleware";
 export { verifyProfileOwner } from "./isProfileOwner.middleware";
+export { verifyRecoveryIsValid } from "./isRecovery.middleware";
 export { verifyIsSeller } from "./isSeller.middleware";
 export { verifyUserExists } from "./UserExists.middleware";
 export { validateSchemaMiddleware } from "./validateSchema.middleware";
