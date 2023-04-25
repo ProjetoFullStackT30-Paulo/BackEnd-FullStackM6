@@ -1,6 +1,5 @@
 import { Router } from "express";
 import {
-  createRecoveryController,
   createUserController,
   deleteUserController,
   listAnnouncementWithUserController,
@@ -14,12 +13,10 @@ import {
 import {
   validateSchemaMiddleware,
   verifyProfileOwner,
-  verifyRecoveryIsValid,
   verifyUserIsAuthenticated,
 } from "../middlewares";
 import {
   PasswordUpdateSchema,
-  RecoveryCreateSchema,
   UserCreateSchema,
   UserLoginSchema,
   UserUpdateRequestSchema,
@@ -41,7 +38,7 @@ userRouter.get("/:id", retrieveUserController);
 
 userRouter.patch(
   "/password",
-  verifyRecoveryIsValid,
+  verifyUserIsAuthenticated,
   validateSchemaMiddleware(PasswordUpdateSchema),
   updatePasswordController
 );
@@ -65,12 +62,6 @@ userRouter.get(
   "/:id/announcements",
   verifyUserIsAuthenticated,
   listAnnouncementWithUserController
-);
-
-userRouter.post(
-  "/password",
-  validateSchemaMiddleware(RecoveryCreateSchema),
-  createRecoveryController
 );
 
 export const sessionRouter = Router();
