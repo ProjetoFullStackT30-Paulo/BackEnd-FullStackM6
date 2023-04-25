@@ -4,6 +4,7 @@ import {
   deleteUserController,
   listAnnouncementWithUserController,
   listUserController,
+  loginUserController,
   profileUserController,
   retrieveUserController,
   updateUserController,
@@ -13,7 +14,11 @@ import {
   verifyProfileOwner,
   verifyUserIsAuthenticated,
 } from "../middlewares";
-import { UserCreateSchema, UserUpdateRequestSchema } from "../schemas";
+import {
+  UserCreateSchema,
+  UserLoginSchema,
+  UserUpdateRequestSchema,
+} from "../schemas";
 
 export const userRouter = Router();
 
@@ -45,4 +50,12 @@ userRouter.get(
   "/:id/announcements",
   verifyUserIsAuthenticated,
   listAnnouncementWithUserController
+);
+
+export const sessionRouter = Router();
+
+sessionRouter.post(
+  "",
+  validateSchemaMiddleware(UserLoginSchema),
+  loginUserController
 );
