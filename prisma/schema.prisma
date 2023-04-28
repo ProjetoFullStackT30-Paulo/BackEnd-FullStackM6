@@ -29,6 +29,7 @@ model User{
   created_at DateTime @default(now())
   address Address?
   announcements Announcement[]
+  token Token?
 
   @@map("users")
 }
@@ -74,4 +75,14 @@ model ListImage{
   announcement_id String
   
   @@map("list_image")
+}
+
+model Token{
+  id String @id @default(uuid())
+  token String @db.VarChar(200)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String @unique
+  created_at DateTime @default(now())
+  
+  @@map("token")
 }
