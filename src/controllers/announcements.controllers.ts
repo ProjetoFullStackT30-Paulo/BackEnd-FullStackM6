@@ -20,7 +20,7 @@ export const listAnnouncementController = async (
   req: Request,
   res: Response
 ) => {
-  const announcements = await listAnnouncementService();
+  const announcements = await listAnnouncementService(req.query);
   return res.json(announcements);
 };
 
