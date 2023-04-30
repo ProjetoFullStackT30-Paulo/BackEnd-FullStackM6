@@ -12,4 +12,8 @@ ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN     "name" VARCHAR(200),
 ADD COLUMN     "size" INTEGER NOT NULL,
 ADD COLUMN     "url" TEXT NOT NULL,
+ADD COLUMN     "user_id" TEXT,
 ALTER COLUMN "announcement_id" DROP NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "list_image" ADD CONSTRAINT "list_image_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
