@@ -71,7 +71,7 @@ model Announcement{
 
 model ListImage{
   id String @id @default(uuid())
-  name String? @db.VarChar(200)
+  name String @db.VarChar(200)
   size Int @db.Integer()
   url String @db.Text()
   created_at DateTime @default(now())
