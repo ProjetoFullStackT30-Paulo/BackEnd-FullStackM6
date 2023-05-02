@@ -28,9 +28,10 @@ model User{
   role Role @default(BUYER)
   created_at DateTime @default(now())
   address Address?
+  profile Image?
   announcements Announcement[]
-  listImage ListImage[]
   token Token?
+  listImage ListImage[]
 
   @@map("users")
 }
@@ -64,25 +65,37 @@ model Announcement{
   created_at DateTime @default(now())
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String 
-  listImage ListImage[] 
+  cover Image? 
+  listImage ListImage[]
 
   @@map("announcements")
 }
 
-model ListImage{
+model Image{
   id String @id @default(uuid())
   name String @db.VarChar(200)
   size Int @db.Integer()
   url String @db.Text()
-  key String @db.VarChar(200)
-  is_cover Boolean @default(false)
-  is_profile Boolean @default(false)
+  key String @unique @db.VarChar(200)
   created_at DateTime @default(now())
-  announcement Announcement? @relation(fields: [announcement_id], references: [id], onDelete: Cascade)
-  announcement_id String?
   user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id String?
+  user_id String? @unique 
+  announcement Announcement? @relation(fields: [announcement_id], references: [id], onDelete: Cascade)
+  announcement_id String? @unique 
+  listImage ListImage[]
+
+  @@map("images")
+}
+
+model ListImage{
+  announcement Announcement @relation(fields: [announcement_id], references: [id], onDelete: Cascade)
+  announcement_id String
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String
+  image Image @relation(fields: [image_id], references: [id], onDelete: Cascade)
+  image_id String
   
+  @@id([announcement_id, user_id, image_id])
   @@map("list_image")
 }
 
