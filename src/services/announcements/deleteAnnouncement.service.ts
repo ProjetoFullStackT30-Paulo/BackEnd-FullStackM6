@@ -21,7 +21,8 @@ export const deleteAnnouncementService = async (id: string) => {
     }
     announcement.listImage.forEach(async ({ image }) => {
       const key = image.key;
-      await prisma.image.delete({ where: { key } });
+      await prisma.clear
+      image.delete({ where: { key } });
       if (!process.env.APP_URL) {
         await cloudinary.uploader.destroy(key);
       } else {
