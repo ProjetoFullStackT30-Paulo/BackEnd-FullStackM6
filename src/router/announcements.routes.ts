@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { AnnouncementCreateSchema, AnnouncementUpdateSchema } from "../schemas";
+import {
+  AnnouncementCreateSchema,
+  AnnouncementUpdateSchema,
+  CommentCreateSchema,
+} from "../schemas";
 import {
   createAnnouncementController,
+  createCommentController,
   deleteAnnouncementController,
+  deleteCommentController,
   listAnnouncementController,
   retrieveAnnouncementController,
   updateAnnouncementController,
@@ -37,4 +43,19 @@ announcementRouter.delete(
   verifyUserIsAuthenticated,
   verifyAnnouncementOwner,
   deleteAnnouncementController
+);
+
+export const commentRouter = Router();
+
+commentRouter.post(
+  "/:id",
+  verifyUserIsAuthenticated,
+  validateSchemaMiddleware(CommentCreateSchema),
+  createCommentController
+);
+
+commentRouter.delete(
+  "/:id",
+  verifyUserIsAuthenticated,
+  deleteCommentController
 );

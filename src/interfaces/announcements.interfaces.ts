@@ -10,6 +10,10 @@ export interface IAnnouncementRequest {
   description: string;
 }
 
+export interface ICommentRequest {
+  comment: string;
+}
+
 export interface IAnnouncementUpdateRequest {
   brand?: string;
   model?: string;
@@ -24,6 +28,7 @@ export interface IAnnouncementUpdateRequest {
 }
 
 export interface IQuery {
+  page?: string;
   brand?: string;
   model?: string;
   manufacture_year?: string;

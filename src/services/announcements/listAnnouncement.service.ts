@@ -1,11 +1,15 @@
 import { IQuery } from "../../interfaces";
 import prisma from "../../prisma";
 
-const filterPrice = (min: string, max: string) => {};
-
 export const listAnnouncementService = async (query: IQuery) => {
   const announcements = await prisma.announcement.findMany({
-    include: { user: { include: { listImage: true } }, listImage: true },
+    skip: +query.page * 10 || 0,
+    take: 10,
+    include: {
+      cover: true,
+      user: { include: { profile: true } },
+      listImage: { include: { image: true } },
+    },
   });
 
   const {
