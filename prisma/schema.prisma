@@ -21,9 +21,9 @@ model User{
   name String @db.VarChar(254)
   email String @db.VarChar(254) @unique
   password String @db.VarChar(128)
-  cpf String @db.VarChar(11) @unique
-  phone String @db.VarChar(20)
-  birthdate String @db.VarChar(50)
+  cpf String @db.VarChar(14) @unique
+  phone String @db.VarChar(15)
+  birthdate String @db.VarChar(10)
   description String @db.Text()
   role Role @default(BUYER)
   created_at DateTime @default(now())
@@ -39,7 +39,7 @@ model User{
 
 model Address{
   id String @id @default(uuid())
-  zip_code String @db.VarChar(8)
+  zip_code String @db.VarChar(9)
   state String @db.VarChar(150)
   city String @db.VarChar(150)
   street String @db.VarChar(150)
