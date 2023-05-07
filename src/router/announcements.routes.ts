@@ -5,6 +5,7 @@ import {
   CommentCreateSchema,
 } from "../schemas";
 import {
+  countAnnouncementController,
   createAnnouncementController,
   createCommentController,
   deleteAnnouncementController,
@@ -30,7 +31,9 @@ announcementRouter.post(
   createAnnouncementController
 );
 announcementRouter.get("", listAnnouncementController);
+announcementRouter.get("/count", countAnnouncementController);
 announcementRouter.get("/:id", retrieveAnnouncementController);
+
 announcementRouter.patch(
   "/:id",
   verifyUserIsAuthenticated,
