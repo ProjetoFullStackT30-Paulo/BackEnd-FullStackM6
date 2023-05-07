@@ -7,6 +7,7 @@ import {
   updateAnnouncementService,
   deleteAnnouncementService,
 } from "../services";
+import { countAnnouncementService } from "../services/announcements/countAnnouncements.service";
 
 export const createAnnouncementController = async (
   req: Request,
@@ -29,6 +30,14 @@ export const listAnnouncementWithUserController = async (
   res: Response
 ) => {
   const announcements = await listAnnouncementWithUserService(req.params.id);
+  return res.json(announcements);
+};
+
+export const countAnnouncementController = async (
+  req: Request,
+  res: Response
+) => {
+  const announcements = await countAnnouncementService();
   return res.json(announcements);
 };
 
