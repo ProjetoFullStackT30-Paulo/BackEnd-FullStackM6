@@ -3,8 +3,8 @@ import prisma from "../../prisma";
 
 export const listAnnouncementService = async (query: IQuery) => {
   const announcements = await prisma.announcement.findMany({
-    skip: +query.page * 10 || 0,
-    take: 10,
+    skip: +query.page * 9 || 0,
+    take: 9,
     include: {
       cover: true,
       user: { include: { profile: true } },
