@@ -13,7 +13,7 @@ export const verifyAnnouncementOwner = async (
     where: { id },
   });
 
-  if (announcements?.user_id === id) {
+  if (announcements?.user_id === req.user.id) {
     return next();
   }
 
