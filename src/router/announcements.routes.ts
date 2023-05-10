@@ -13,6 +13,7 @@ import {
   listAnnouncementController,
   retrieveAnnouncementController,
   updateAnnouncementController,
+  updateCommentController,
 } from "../controllers";
 import {
   validateSchemaMiddleware,
@@ -20,6 +21,7 @@ import {
   verifyIsSeller,
   verifyUserIsAuthenticated,
 } from "../middlewares";
+import { verifyCommentOwner } from "../middlewares/isCommentOwner.middleware";
 
 export const announcementRouter = Router();
 
@@ -61,4 +63,12 @@ commentRouter.delete(
   "/:id",
   verifyUserIsAuthenticated,
   deleteCommentController
+);
+
+commentRouter.patch(
+  "/:id",
+  verifyUserIsAuthenticated,
+  verifyCommentOwner,
+  validateSchemaMiddleware(CommentCreateSchema),
+  updateCommentController
 );
